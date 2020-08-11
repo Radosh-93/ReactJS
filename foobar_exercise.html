@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<div id="result"></div>
+	<script>
+		//Рішення №1
+		let arr = [];
+		const fillArray1 = (array) => {
+			for (let i = 1; i < 101; i++) {
+				if (!(i % 5) && !(i % 3)) {
+					array.push('foobar')
+				} else if (!(i % 3)) {
+					array.push('foo')
+				} else if (!(i % 5)) {
+					array.push('bar')
+				} else {
+					array.push(i)
+				}
+			}
+			return array
+		}
+		console.log(fillArray1(arr));
+
+		//Рішення №2
+		const fillArray2 = (count) => (new Array(count).fill(1).map((item, i) => i + 1)) // отримали масив від 1 до 100 [1, 2, 3 ...]
+		const foobar = (array) => array.map(num => (!(num % 5) && !(num % 3)) ? 'foobar' : (!(num % 3)) ? 'foo' : (!(num % 5)) ? 'bar' : num)
+
+		console.log(foobar(fillArray2(100)))
+	</script>
+</body>
+
+</html>
