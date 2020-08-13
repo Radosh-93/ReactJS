@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		let a = {
+			name: 'it-kamasutra.com',
+			protocol: 'https',
+			maxStudentsCount: 10,
+			isOnline: true,
+			students: ['Ivan', 'Andrey', 'Farid'],
+			classroom: {
+				teatcher: {
+					name: 'wew',
+					age: 18
+				}
+			}
+		}
+		console.log(a)
+		console.log('-------')
+		let b = a; //просто створюється посилання на один об'єкт
+		b.name = 'google.com' // зміниться як в об'єкті 'a', так і в 'b'
+		console.log(b.name) //'google.com'
+		console.log('-------')
+		console.log(a.name) //'google.com'
+		console.log('-------')
+		let c = { ...a } //shallow copy - поверхневе копіювання, тільки верхні рівні об'єкту скопіюються
+		c.name = 'facebook.com'
+		console.log(c)
+		console.log(c.name) //facebook.com
+		console.log(a.name) //google.com
+		c.classroom.teatcher.name = 'Sara'
+		console.log(c.classroom.teatcher.name); //Sara
+		console.log(b.classroom.teatcher.name); //Sara - бо це shallow copy
+
+		//Deep copy
+
+		let d = { ...a };
+		d.classroom = { ...a.classroom };
+		d.classroom.teatcher = { ...a.classroom.teatcher };
+		d.students = [...d.students] //масиви це теж об'єкти, їх теж треба копіювати так
+
+		d.classroom.teatcher.name = 'Alex';
+
+		console.log('==Deep copy====')
+		console.log(a)
+		console.log(d)
+
+
+	</script>
+</body>
+
+</html>
