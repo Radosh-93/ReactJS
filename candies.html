@@ -9,12 +9,34 @@
 
 <body>
 	<script>
+		class Candy {
+			constructor(x, y, z, w) {
+				this.x = x;
+				this.y = y;
+				this.z = z;
+				this.w = w;
+			}
+			giftOptions() {
+				let arr = [this.x, this.y, this.z];
+				let sum = arr.reduce((a, c) => a + c);
+				let countGift = Math.trunc(this.w / sum) //округлює до коми, не враховуючи все що йде після (1,85 = 1)
+				return countGift * arr.length;
+			}
+		}
+		let candies = new Candy(10, 15, 25, 180);
+		let result1 = candies.giftOptions();
+		console.log('Class: ' + result1);
 
-		giftOptions = (x, y, z, w) => {
 
+		let giftOptions = (x, y, z, w) => {
+			let arr = [x, y, z];
+			let sum = arr.reduce((a, c) => a + c)
+			let countGift = Math.trunc(w / sum);
+			let count = countGift * arr.length;
 			return count
 		}
-		giftOptions(15, 25, 10, 80); //return 6
+		let result = giftOptions(15, 15, 10, 80); //return 6
+		console.log(result)
 	</script>
 </body>
 
