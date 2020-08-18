@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tasks to solve</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<h1>Tasks to solve</h1>
+	<a href="http://old.code.mu/tasks/javascript/practice/praktika-javascript-dlya-novichkov.html">Source</a>
+
+	<!--============First tast================-->
+
+
+	<div class="container">
+		<p style="color: #5D016D">#1 Даны 3 инпута и кнопка. По нажатию на кнопку получите числа, стоящие в этих инпутах и
+			запишите их сумму в четвертый инпут.</p>
+		<input class="cls" type="number">
+		<input class="cls" type="number">
+		<input class="cls" type="number">
+		<button id="getResult">Summ</button>
+		<input style="display: block; margin-top: 5px;" id="result" type="number" value="">
+	</div>
+
+
+	<script>
+		let elements = document.getElementsByClassName('cls');
+		let result = document.getElementById('result');
+		let getResult = document.getElementById('getResult')
+		getResult.addEventListener('click', getSum)
+
+		function getSum() {
+			let sum = 0;
+			for (let i = 0; i < elements.length; i++) {
+				sum += Number(elements[i].value);
+				elements[i].value = ''
+			}
+			result.value = sum;
+		}
+	</script>
+
+	<!--============ Task #2 ================-->
+	<hr width="100%">
+	<div class="container">
+		<p style="color: #5D016D">#2 Даны N инпутов с классом .num и кнопка. По нажатию на кнопку получите числа, стоящие в
+			этих инпутах и запишите их сумму в абзац с id="result".</p>
+		<input type="number" class="num" placeholder="number">
+		<input type="number" class="num" placeholder="number">
+		<input type="number" class="num" placeholder="number">
+		<button id="btn2">Click</button>
+		<p id="result2">0</p>
+	</div>
+	<hr width="100%">
+	<script>
+		let elements2 = document.getElementsByClassName('num');
+		let btn2 = document.getElementById('btn2');
+		let result2 = document.getElementById('result2');
+		btn2.addEventListener('click', getSum2);
+		function getSum2() {
+			let sum = 0;
+			for (let i = 0; i < elements2.length; i++) {
+				sum += Number(elements2[i].value);
+			}
+			result2.innerHTML = sum;
+		}
+	</script>
+	<!--============ Task #3 ================-->
+	<hr width="100%">
+	<div class="container">
+		<p style="color: #5D016D">#3 Дан инпут. В него вводится число. По потери фокуса найдите сумму цифр этого числа..</p>
+		<input type="number" id="num3">
+	</div>
+	<script>
+		let input3 = document.getElementById('num3');
+		input3.addEventListener('focusout', func3);
+
+		function func3() {
+			let result = input3.value.split('').reduce((p, c) => +p + +c);
+			input3.value = result;
+		} 
+	</script>
+</body>
+
+</html>
