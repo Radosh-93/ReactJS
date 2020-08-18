@@ -10,7 +10,8 @@
 
 <body>
 	<h1>Tasks to solve</h1>
-	<a href="http://old.code.mu/tasks/javascript/practice/praktika-javascript-dlya-novichkov.html">Source</a>
+	<a href="http://old.code.mu/tasks/javascript/practice/praktika-javascript-dlya-novichkov.html"
+		target="_blank">Source</a>
 
 	<!--============First tast================-->
 
@@ -53,7 +54,6 @@
 		<button id="btn2">Click</button>
 		<p id="result2">0</p>
 	</div>
-	<hr width="100%">
 	<script>
 		let elements2 = document.getElementsByClassName('num');
 		let btn2 = document.getElementById('btn2');
@@ -70,7 +70,7 @@
 	<!--============ Task #3 ================-->
 	<hr width="100%">
 	<div class="container">
-		<p style="color: #5D016D">#3 Дан инпут. В него вводится число. По потери фокуса найдите сумму цифр этого числа..</p>
+		<p>#3 Дан инпут. В него вводится число. По потери фокуса найдите сумму цифр этого числа..</p>
 		<input type="number" id="num3">
 	</div>
 	<script>
@@ -82,6 +82,56 @@
 			input3.value = result;
 		} 
 	</script>
+
+	<!--============ Task #4 ================-->
+	<hr width="100%">
+	<div class="container">
+		<p>#4 Дан инпут. В него вводятся числа через запятую. По потери фокуса найдите среднее арифметическое этих чисел</p>
+		<input type="text" id="field4">
+	</div>
+	<script>
+		let input4 = document.getElementById('field4');
+		input4.addEventListener('blur', func4);
+
+		function func4() {
+			let arr = input4.value.split(',');
+			let sum = arr.reduce((p, c) => +p + +c);
+			input4.value = (sum / arr.length).toFixed(2);
+		}
+	</script>
+
+	<!--============ Task #5 ================-->
+	<hr width="100%">
+	<div class="container">
+		<p>#5 Дан инпут. В него вводится ФИО через пробел. По потери фокуса запишите фамилию, имя и отчество в отдельные
+			инпуты</p>
+		<input id="fullname" type="text" style="width: 350px;"><br><br>
+		<input class="name" type="text">
+		<input class="name" type="text">
+		<input class="name" type="text">
+	</div>
+	<script>
+
+		let fullname5 = document.getElementById('fullname');
+
+
+		fullname5.addEventListener('blur', splitFullName);
+
+		function splitFullName() {
+			let name = document.getElementsByClassName('name');
+			let arr = fullname5.value.split(' ');
+			if (fullname5.value !== '') {
+				for (let i = 0; i < arr.length; i++) {
+					name[i].value = arr[i]
+				}
+			} else {
+				fullname5.placeholder = 'Enter your full name...'
+			}
+
+		}
+
+	</script>
+
 </body>
 
 </html>
