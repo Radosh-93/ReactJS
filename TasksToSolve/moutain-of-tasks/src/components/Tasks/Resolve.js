@@ -21,9 +21,9 @@ export const Resolve = (e) => {
 			}
 			return (
 				<div className='solution'>
-					{input3.map((el, i) => <input className={cls} type="number" key={i}/>)}
+					{input3.map((el, i) => <input className={cls} type="number" key={i} />)}
 					<button onClick={getSum}>Sum</button>
-					<input style={{display: 'block', marginTop: `5px`}} id={result} type="number"/>
+					<input style={{ display: 'block', marginTop: `5px` }} id={result} type="number" />
 				</div>
 			)
 		}
@@ -39,7 +39,7 @@ export const Resolve = (e) => {
 			}
 			return (
 				<div className='solution'>
-					{input3.map((el, i) => <input type="number" className={cls} placeholder="number" key={i}/>)}
+					{input3.map((el, i) => <input type="number" className={cls} placeholder="number" key={i} />)}
 					<button onClick={getSum2}>Click</button>
 					<p id={result}>0</p>
 				</div>
@@ -52,7 +52,7 @@ export const Resolve = (e) => {
 			}
 			return (
 				<div className='solution'>
-					<input type="number" id={id} onBlur={func3}/>
+					<input type="number" id={id} onBlur={func3} />
 				</div>
 			)
 		}
@@ -65,7 +65,7 @@ export const Resolve = (e) => {
 			}
 			return (
 				<div className='solution'>
-					<input type="text" id={id} onBlur={average}/>
+					<input type="text" id={id} onBlur={average} />
 				</div>
 			)
 		}
@@ -84,25 +84,38 @@ export const Resolve = (e) => {
 			}
 			return (
 				<div className='solution'>
-					<input id="fullName" type="text" style={{width: `350px`}} onBlur={func}/><br/>
-					{input3.map((el, i) => <input className={cls} type="text" key={i}/>)}
+					<input id="fullName" type="text" style={{ width: `350px` }} onBlur={func} /><br />
+					{input3.map((el, i) => <input className={cls} type="text" key={i} />)}
 				</div>
 			)
 		}
 		case 6: {
-			let func = () => {
-				let fullName = getId(id);
-				let arr = fullName.value.split(' ');
+			let uswords = (str) => {
+				let arr = str.split(' ');
 				for (let i = 0; i < arr.length; i++) {
-					arr[i] = arr[i].split('');
-					arr[i][0] = arr[i][0].toUpperCase();
-					arr[i].join('');
+					arr[i] = arr[i][0].toUpperCase().concat(arr[i].slice(1))
 				}
-
+				str = arr.join(' ');
+				return str
+			}
+			let bigLetter = () => {
+				let elem = getId(id);
+				elem.value = uswords(elem.value)
 			}
 			return (
 				<div className='solution'>
-					<input type="text" onBlur={func} id={id}/>
+					<input type="text" onBlur={bigLetter} id={id} style={{ width: `350px` }} />
+				</div>
+			)
+		}
+		case 7: {
+			let ucFirst = (str) => {
+				if (!str) return str;
+				return str[0].toUpperCase() + str.slice(1)
+			}
+			return (
+				<div className='solution'>
+					{ucFirst('jonny')}
 				</div>
 			)
 		}
