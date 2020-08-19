@@ -2,9 +2,9 @@ import { combineReducers, createStore } from "redux";
 import taskReducer from './tasks-reducer'
 
 let reducers = combineReducers({
-	taskPage: taskReducer
+	tasksPage: taskReducer
 });
-let store = createStore(reducers)
+let store = createStore(reducers);
 
 window.store = store;
 
