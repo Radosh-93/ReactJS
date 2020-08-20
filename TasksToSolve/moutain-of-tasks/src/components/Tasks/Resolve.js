@@ -109,13 +109,17 @@ export const Resolve = (e) => {
 			)
 		}
 		case 7: {
-			let ucFirst = (str) => {
-				if (!str) return str;
-				return str[0].toUpperCase() + str.slice(1)
+			let wordsAmount = () => {
+				let elem = getId(id);
+				let results = getId(result)
+				let arr = elem.value.split(' ');
+				results.innerHTML = ''+arr.length;
+
 			}
 			return (
 				<div className='solution'>
-					{ucFirst('jonny')}
+					<input type="text" onBlur={wordsAmount} id={id}/>
+					<p id={result}>0</p>
 				</div>
 			)
 		}
