@@ -28,6 +28,10 @@ let initialState = {
 			id: 7,
 			description: 'Дан инпут. В него вводится текст. По потери фокуса узнайте количество слов в этом тексте.'
 		},
+		{
+			id: 8,
+			description: 'Дан инпут. В него вводится текст. По потери фокуса узнайте количество символов в самом длинном слове в этом тексте.'
+		},
 	],
 	sourcePage: 'http://old.code.mu/tasks/javascript/practice/praktika-javascript-dlya-novichkov.html'
 }

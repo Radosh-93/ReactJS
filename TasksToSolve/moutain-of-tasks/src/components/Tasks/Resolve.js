@@ -113,12 +113,33 @@ export const Resolve = (e) => {
 				let elem = getId(id);
 				let results = getId(result)
 				let arr = elem.value.split(' ');
-				results.innerHTML = ''+arr.length;
+				let newArr = arr.filter((el) => el !== '');
+				results.innerHTML = ''+newArr.length;
 
 			}
 			return (
 				<div className='solution'>
 					<input type="text" onBlur={wordsAmount} id={id}/>
+					<p id={result}>0</p>
+				</div>
+			)
+		}
+		case 8: {
+			let chekComma = (arr) => arr.split('').filter((e) => e !== ',').join('');
+			let maxWord = () => {
+				let elem = getId(id);
+				let results = getId(result);
+				let arr = elem.value.split(' ');
+				let maxWord = '';
+				for (let i = 0; i < arr.length; i++) {
+					arr[i] = chekComma(arr[i]);
+					maxWord = arr[i].length > maxWord.length ? arr[i] : maxWord;
+				}
+				results.innerHTML = ''+maxWord.length
+			}
+			return (
+				<div className='solution'>
+					<input type="text" id={id} onBlur={maxWord}/>
 					<p id={result}>0</p>
 				</div>
 			)
