@@ -144,6 +144,39 @@ export const Resolve = (e) => {
 				</div>
 			)
 		}
+		case 9: {
+			const changeFormatDate = (e) => {
+				let elem = getId(id);
+				elem.value = elem.value.split('.').reverse().join('-');
+			}
+			return (
+				<div className='solution'>
+					<input type="text" onBlur={changeFormatDate} id={id}/>
+				</div>
+			)
+		}
+		case 10: {
+			let getYearsOld = () => {
+				let elem = getId(id);
+				let results = getId(result)
+				let date = new Date();
+				let yearNow = date.getFullYear();
+				if (elem.value !== '') {
+					results.style.color = 'black';
+					results.innerHTML = 'You are ' + (yearNow - elem.value) + ' years old';
+				} else {
+					results.style.color = 'red';
+					results.innerHTML = 'Enter your year of birth'
+				}
+			}
+			return (
+				<div className='solution'>
+					<input type="number" id={id}/>
+					<button onClick={getYearsOld}>Calculate</button>
+					<p id={result}>...</p>
+				</div>
+			)
+		}
 		case 100: {
 			return (
 				<div className='solution'>
