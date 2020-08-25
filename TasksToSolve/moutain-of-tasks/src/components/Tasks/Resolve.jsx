@@ -1,6 +1,7 @@
 import React from "react";
 
-export const Resolve = (e) => {
+export const Resolve = (props) => {
+    let e = props.id;
     let getId = (id) => document.getElementById(id)
     let getCls = (cl) => document.getElementsByClassName(cl)
     let input3 = [1, 3, 3]
