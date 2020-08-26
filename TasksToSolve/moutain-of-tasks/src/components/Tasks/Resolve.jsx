@@ -215,8 +215,7 @@ export const Resolve = (props) => {
             let checkNumber = (e) => {
                 let elem = e.target.value;
                 let results = getId(result);
-                let num = elem.match(/3/)
-                results.innerHTML = !num ? 'No' : 'Yes'
+                results.innerHTML = elem.split('').some(e => e === '3') ? 'Yes' : 'No'
             }
             return (
                 <div className='solution'>
