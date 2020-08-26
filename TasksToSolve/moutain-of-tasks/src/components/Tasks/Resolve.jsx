@@ -211,6 +211,73 @@ export const Resolve = (props) => {
                 </div>
             )
         }
+        case 13: {
+            let checkNumber = (e) => {
+                let elem = e.target.value;
+                let results = getId(result);
+                let num = elem.match(/3/)
+                results.innerHTML = !num ? 'No' : 'Yes'
+            }
+            return (
+                <div className='solution'>
+                    <input type="number" onBlur={checkNumber}/>
+                    <p>Is number 3 in the input? <span id={result} style={{fontWeight: "bold"}}>...</span></p>
+                </div>
+            )
+        }
+        case 14: {
+            let addOrderForP = () => {
+                let paragraphs = getCls('cls_p');
+                for (let i = 0; i < paragraphs.length; i++) {
+                    paragraphs[i].innerHTML += ' ' + (i + 1)
+                }
+            }
+            return (
+                <div className='solution'>
+                    <p className='cls_p'>lorem</p>
+                    <p className='cls_p'>lorem</p>
+                    <p className='cls_p'>lorem</p>
+                    <p className='cls_p'>lorem</p>
+                    <button onClick={addOrderForP}>Click</button>
+                </div>
+            )
+        }
+        case 15: {
+            let addNumbersToInput = () => {
+                let paragraphs = getCls(cls);
+                let results = getId(result);
+                let arr = [];
+                for (let i = 0; i < paragraphs.length; i++) {
+                    arr.push(paragraphs[i].innerHTML)
+                }
+                results.value = arr.sort((a,b)=> a - b).join(',')
+            }
+            return (
+                <div className='solution'>
+                    <p className={cls}>345</p>
+                    <p className={cls}>33</p>
+                    <p className={cls}>3213</p>
+                    <p className={cls}>67</p>
+                    <button onClick={addNumbersToInput}>Add to input</button>
+                    <input type="text" id={result}/>
+                </div>
+            )
+        }
+        case 16: {
+            window.onload = () => {
+                let elements = getCls(cls);
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].innerHTML +=`( ${elements[i].href} )`
+                }
+            }
+            return (
+                <div className='solution' style={{display: "flex", flexDirection: "column"}}>
+                    <a className={cls} href="https://www.google.com">Google</a>
+                    <a className={cls} href="https://www.facebook.com">Facebook</a>
+                    <a className={cls} href="https://www.youtube.com">Youtube</a>
+                </div>
+            )
+        }
         case 100: {
             return (
                 <div className='solution'>
