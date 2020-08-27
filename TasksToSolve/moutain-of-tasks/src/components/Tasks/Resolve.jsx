@@ -277,6 +277,36 @@ export const Resolve = (props) => {
                 </div>
             )
         }
+        case 17: {
+            window.onload = () => {
+                let elements = getCls(cls);
+                for (let i = 0; i < elements.length; i++) {
+                    if(elements[i].href.includes('http://')) {
+                        elements[i].innerHTML += '&rarr;'
+                    }
+                }
+            }
+            return (
+                <div className='solution' style={{display: "flex", flexDirection: "column"}}>
+                    <a href="http://www.google.com" className={cls}>google.com</a>
+                    <a href="ftp://facebook.com" className={cls}>facebook.com</a>
+                    <a href="https://www.stuckoverflow.com" className={cls}>stuckoverflow.com</a>
+                </div>
+            )
+        }
+        case 18: {
+            let squaredNumber = (e) => {
+                //let elements = getCls(cls)
+                e.target.innerHTML *= e.target.innerHTML;
+                }
+            return (
+                <div className='solution' style={{display: "flex"}}>
+                    <p className={cls} onClick={squaredNumber}>3</p>
+                    <p style={{margin: '16px 5px', cursor: 'pointer'}} className={cls} onClick={squaredNumber}>4</p>
+                    <p className={cls} onClick={squaredNumber}>5</p>
+                </div>
+            )
+        }
         case 100: {
             return (
                 <div className='solution'>

@@ -64,6 +64,14 @@ let initialState = {
 			id: 16,
 			description: 'Даны ссылки. По загрузке страницы добавьте в конец каждой ссылки ее href в круглых скобках.'
 		},
+		{
+			id: 17,
+			description: 'Даны ссылки. По загрузке страницы, если ссылка начинается с http://, то добавьте ей в конец стрелку → (делается так: &rarr;).'
+		},
+		{
+			id: 18,
+			description: 'Даны N абзацев с числами. По нажатию на любой абзац запишите в него квадрат числа, которое в нем находится.'
+		},
 	],
 	sourcePage: 'http://old.code.mu/tasks/javascript/practice/praktika-javascript-dlya-novichkov.html'
 }
