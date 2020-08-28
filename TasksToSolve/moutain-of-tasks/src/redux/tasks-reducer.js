@@ -1,3 +1,5 @@
+
+
 let initialState = {
 	tasksToSolve: [
 		{
@@ -71,6 +73,10 @@ let initialState = {
 		{
 			id: 18,
 			description: 'Даны N абзацев с числами. По нажатию на любой абзац запишите в него квадрат числа, которое в нем находится.'
+		},
+		{
+			id: 19,
+			description: 'Даны картинки. По нажатию на любую картинку увеличьте ее в 2 раза.'
 		},
 	],
 	sourcePage: 'http://old.code.mu/tasks/javascript/practice/praktika-javascript-dlya-novichkov.html'

@@ -1,4 +1,6 @@
 import React from "react";
+import Pic1 from '../../access/img/anime_girl.avif'
+import Pic2 from '../../access/img/picture.avif'
 
 export const Resolve = (props) => {
     let e = props.id;
@@ -184,10 +186,10 @@ export const Resolve = (props) => {
                 let results = getId(result);
                 let elemValue = elem.value;
                 if (elemValue) {
-					let date = new Date(elemValue.split('.').reverse().join('/'));
-					let option = {weekday: 'long'};
-					results.innerHTML = 'Day of week: ' + date.toLocaleDateString('en', option);
-				}
+                    let date = new Date(elemValue.split('.').reverse().join('/'));
+                    let option = {weekday: 'long'};
+                    results.innerHTML = 'Day of week: ' + date.toLocaleDateString('en', option);
+                }
             }
             return (
                 <div className='solution'>
@@ -249,7 +251,7 @@ export const Resolve = (props) => {
                 for (let i = 0; i < paragraphs.length; i++) {
                     arr.push(paragraphs[i].innerHTML)
                 }
-                results.value = arr.sort((a,b)=> a - b).join(',')
+                results.value = arr.sort((a, b) => a - b).join(',')
             }
             return (
                 <div className='solution'>
@@ -266,7 +268,7 @@ export const Resolve = (props) => {
             window.onload = () => {
                 let elements = getCls(cls);
                 for (let i = 0; i < elements.length; i++) {
-                    elements[i].innerHTML +=`( ${elements[i].href} )`
+                    elements[i].innerHTML += `( ${elements[i].href} )`
                 }
             }
             return (
@@ -281,7 +283,7 @@ export const Resolve = (props) => {
             window.onload = () => {
                 let elements = getCls(cls);
                 for (let i = 0; i < elements.length; i++) {
-                    if(elements[i].href.includes('http://')) {
+                    if (elements[i].href.includes('http://')) {
                         elements[i].innerHTML += '&rarr;'
                     }
                 }
@@ -298,12 +300,55 @@ export const Resolve = (props) => {
             let squaredNumber = (e) => {
                 //let elements = getCls(cls)
                 e.target.innerHTML *= e.target.innerHTML;
-                }
+            }
             return (
                 <div className='solution' style={{display: "flex"}}>
                     <p className={cls} onClick={squaredNumber}>3</p>
                     <p style={{margin: '16px 5px', cursor: 'pointer'}} className={cls} onClick={squaredNumber}>4</p>
                     <p className={cls} onClick={squaredNumber}>5</p>
+                </div>
+            )
+        }
+        case 19: {
+            function onloadFun() {
+                let elements = getCls(cls);
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].addEventListener('click', increaseSize)
+                }
+            }
+
+            function increaseSize(e) {
+                this.width = this.width * 2;
+                this.height = this.height * 2;
+                this.removeEventListener('click', increaseSize)
+                this.addEventListener('click', decreaseSize)
+            }
+
+            function decreaseSize() {
+                this.width = this.width / 2;
+                this.height = this.height / 2;
+                this.removeEventListener('click', decreaseSize)
+                this.addEventListener('click', increaseSize)
+            }
+
+            return (
+                <div className='solution'>
+                    <img src={Pic1} alt="test"
+                         className={cls}
+                         onLoad={onloadFun}
+                         height='100'
+                         width='100'
+                         style={{
+                             objectFit: 'cover',
+                             objectPosition: 'top center',
+                             marginRight: '20px'
+                         }}/>
+                    <img src={Pic2} alt="test"
+                         className={cls}
+                         onLoad={onloadFun}
+                         height='100'
+                         width='100'
+                         style={{objectFit: 'cover', objectPosition: 'left top'}}/>
                 </div>
             )
         }
