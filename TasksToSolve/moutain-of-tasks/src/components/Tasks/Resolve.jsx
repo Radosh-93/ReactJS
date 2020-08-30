@@ -2,15 +2,14 @@ import React from "react";
 import Pic1 from '../../access/img/original.webp'
 import Pic2 from '../../access/img/sorrow-2581703_960_720.jpg'
 
-export const Resolve = (props) => {
-    let e = props.id;
+export const Resolve = ({itemId, data}) => {
     let getId = (id) => document.getElementById(id)
     let getCls = (cl) => document.getElementsByClassName(cl)
     let input3 = [1, 3, 3]
-    let cls = 'cls' + e
-    let id = 'id' + e
-    let result = 'result' + e
-    switch (e) {
+    let cls = 'cls' + itemId
+    let id = 'id' + itemId
+    let result = 'result' + itemId
+    switch (itemId) {
         case 1: {
             let getSum = () => {
                 let elements = getCls(cls);
@@ -353,13 +352,9 @@ export const Resolve = (props) => {
             )
         }
         case 21: {
-            const images = [
-                'https://image.winudf.com/v2/image/Y29tLnN1YWRhaDA2MTEuYW5pbWVnaXJsa2F3YWlpYXBwX3NjcmVlbl8yXzE1MjM4OTA0OTRfMDI0/screen-2.jpg?fakeurl=1&type=.jpg',
-                'https://assets.puzzlefactory.pl/puzzle/181/561/original.jpg'
-            ]
             return (
                 <div className='solution'>
-                    {images.map(img => <img src={img} height='30' alt={'anime'}/>)}
+                    {data.images.map(img => <img src={img} height='30' alt={'anime'}/>)}
                 </div>
             )
         }

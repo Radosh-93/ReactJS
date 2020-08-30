@@ -76,7 +76,11 @@ let initialState = {
 		},
 		{
 			id: 19,
-			description: 'Даны картинки. По нажатию на любую картинку увеличьте ее в 2 раза.'
+			description: 'Даны картинки. По нажатию на любую картинку увеличьте ее в 2 раза.',
+			data: {images: [
+					'https://image.winudf.com/v2/image/Y29tLnN1YWRhaDA2MTEuYW5pbWVnaXJsa2F3YWlpYXBwX3NjcmVlbl8yXzE1MjM4OTA0OTRfMDI0/screen-2.jpg?fakeurl=1&type=.jpg',
+					'https://assets.puzzlefactory.pl/puzzle/181/561/original.jpg'
+				]}
 		},
 	],
 	sourcePage: 'http://old.code.mu/tasks/javascript/practice/praktika-javascript-dlya-novichkov.html'

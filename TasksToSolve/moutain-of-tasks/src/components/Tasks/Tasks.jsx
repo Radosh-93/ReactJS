@@ -14,7 +14,7 @@ const Tasks = (props) => {
 			{props.tasksData.map(el => (
 				<div className="container" key={el.id}>
 					<p style={pStyle}><b>#{el.id}</b>{` ${el.description}`}</p>
-					<Resolve id={el.id}/>
+					<Resolve itemId={el.id} data={el.data}/>
 				</div>
 			))}
 		</div>
