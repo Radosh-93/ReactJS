@@ -2,15 +2,16 @@ import React from 'react';
 import './App.css';
 import TasksContainer from "./components/Tasks/TasksContainer";
 import {NavLink, Route} from "react-router-dom";
-import ResolveC from "./components/Tasks/ResolveC";
+import RecipeApp from "./components/RecipeApp/RecipeApp";
 
 function App() {
     return (
         <div className="App">
-            <NavLink to={'/tasks'} style={{display: 'block'}}>Tasks</NavLink>
-            <NavLink to={'/test'}>Test</NavLink>
+            <NavLink className={'btn'} to={'/tasks'}>Resolved tasks</NavLink>
+            <NavLink className={'btn'} to={'/recipe'}>Recipe App</NavLink>
             <Route path={'/tasks'} render={() => <TasksContainer/>}/>
-            <Route path={'/test'} render={() => <ResolveC/>}/>
+            <Route path={'/recipe'} render={() => <RecipeApp/>}/>
+
         </div>
     );
 }

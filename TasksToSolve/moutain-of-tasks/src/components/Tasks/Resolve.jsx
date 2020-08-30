@@ -1,6 +1,6 @@
 import React from "react";
-import Pic1 from '../../access/img/anime_girl.avif'
-import Pic2 from '../../access/img/picture.avif'
+import Pic1 from '../../access/img/original.webp'
+import Pic2 from '../../access/img/sorrow-2581703_960_720.jpg'
 
 export const Resolve = (props) => {
     let e = props.id;
@@ -348,7 +348,18 @@ export const Resolve = (props) => {
                          onLoad={onloadFun}
                          height='100'
                          width='100'
-                         style={{objectFit: 'cover', objectPosition: 'left top'}}/>
+                         style={{objectFit: 'cover', objectPosition: 'top center'}}/>
+                </div>
+            )
+        }
+        case 21: {
+            const images = [
+                'https://image.winudf.com/v2/image/Y29tLnN1YWRhaDA2MTEuYW5pbWVnaXJsa2F3YWlpYXBwX3NjcmVlbl8yXzE1MjM4OTA0OTRfMDI0/screen-2.jpg?fakeurl=1&type=.jpg',
+                'https://assets.puzzlefactory.pl/puzzle/181/561/original.jpg'
+            ]
+            return (
+                <div className='solution'>
+                    {images.map(img => <img src={img} height='30' alt={'anime'}/>)}
                 </div>
             )
         }
