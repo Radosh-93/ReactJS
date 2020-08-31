@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Destructuring assignment of Arrays and Objects</title>
+</head>
+
+<body>
+    <script>
+        /*====Деструктуризация массива====*/
+        /*================================*/
+        let arr = ['John', 'Snow']
+        let [firstName, surname] = arr;
+        // деструктурирующее присваивание
+        // записывает firstName=arr[0], surname=arr[1]
+
+        console.log(firstName) // John
+        console.log(surname) // Snow
+
+        /*В сочетании со split:*/
+        let [name, secondName] = 'John Snow'.split(' ');
+        console.log(name) // John
+        console.log(secondName) // Snow
+
+        /*Пропускайте элементы, используя запятые*/
+        let [firstName2, , title] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
+        console.log(title) //Consul
+
+        /*Работает с любым перебираемым объектом с правой стороны*/
+        let [a, b, c] = 'abc';
+        let [one, two, three] = new Set([1, 2, 3]);
+
+        /*Присваивание свойству объекта с левой стороны*/
+        let user = {};
+        [user.name, user.surname] = "John Snow".split(' ') //let не нужен, так как это свойства объекта
+        console.log(user.name) //John
+
+        /*Цикл с .entries()*/
+        let item = {
+            name: 'John',
+            age: 30
+        }
+        // цикл по ключам и значениям
+        for (let [key, value] of Object.entries(item)) {
+            console.log(`${key}: ${value}`); //name: John, затем age: 30
+        }
+
+        //то же самое для map:
+        let item2 = new Map();
+        item2.set('name', 'John');
+        item2.set('age', '30');
+        for (let [key, value] of item2) {
+            console.log(`${key}:${value}`); // name:John, затем age:30
+        }
+
+        /*Остаточные параметры …*/
+        let [name1, name2, ...rest] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
+        console.log(name1) // Julius
+        console.log(name2) // Caesar
+        // Обратите внимание, что `rest` является массивом.
+        console.log(rest[0]) //Consul
+        console.log(rest.length) // 2
+
+        /*Значения по умолчанию*/
+        let [fName, sName] = [];
+        console.log(fName) //undefined
+        console.log(sName) //undefined
+
+        // значение по умолчанию
+        let [nameD = 'Guest', surnameD = 'Anonymous'] = ['Julius'];
+        console.log(nameD); //Julius (из масива)
+        console.log(surnameD) // Anonymous (значение по умолчанию)
+
+        let [nameF = prompt('name?'), surnameF = prompt('surname?')] = ['Julius'];
+        console.log(nameF); // Julius (из масива)
+        console.log(surnameF) //результат prompt
+
+
+        /*====Деструктуризация объекта====*/
+        /*================================*/
+        let options = {
+            title: 'Menu',
+            width: 100,
+            height: 200
+        };
+        let { titleO, width, height } = options;
+        console.log(titleO) // Menu
+        console.log(width) // 100
+        console.log(height) //200
+
+        // изменён порядок в let {...}
+        let { height2, width2, title2 } = { title2: 'Menu', height2: 200, width2: 100 }
+        //Свойства options.title2, options.width1 и options.height2 присваиваются соответствующим переменным.
+        // Порядок не имеет значения.
+
+        //Если мы хотим присвоить свойство объекта переменной с другим название
+        let options2 = {
+            title: 'Menu',
+            width: 100,
+            height: 200
+        };
+        let { width: w, height: h, titleD } = options2; //Двоеточие показывает «что : куда идёт».
+        //width -> w
+        //height -> h
+        //title -> title
+        console.log(w) //100
+        console.log(h) // 200
+
+        /*Для потенциально отсутствующих свойств
+         мы можем установить значения по умолчанию, используя "=", как здесь:*/
+        let options3 = {
+            title: 'Menu'
+        };
+        let { width3 = 100, height3 = 200, title3 } = options3;
+        console.log(title3) // Menu
+        console.log(width3) //100
+        console.log(height3) //200
+
+        /*Tasks*/
+        //#1
+        let users = { nameU: 'John', years: 30 };
+        let { nameU, years: age, isAdmin = false } = users;
+        // alert(nameU);
+        // alert(age);
+        // alert(isAdmin)
+
+        //#2
+        let salaries = {
+            "John": 100,
+            "Pete": 300,
+            "Mary": 250
+        };
+        let arrayFromObject = Object.entries(salaries); // [["John", 100], ["Pete", 300], ["Mary", 250]]
+        let sortedArray = arrayFromObject.sort(([, a], [, b]) => b - a) // отсортированный масив масивов по спаданию, певый масив с большой зп
+        let maxName = sortedArray[0][0];
+        console.log(maxName)
+
+        /*Одной строчкой*/
+        function topSalary2(obj) {
+            return Object.entries(obj).length !== 0 ? Object.entries(obj).sort(([, a], [, b]) => b - a)[0][0] : null
+        }
+        console.log('Oдной строчкой:' + topSalary2(salaries));
+
+        //решение 2
+        let arr2 = [];
+        let arrName = [];
+        let topSalary = (salaries) => {
+            for (let [key, value] of Object.entries(salaries)) {
+                arr2.push(value);
+                arrName.push(key)
+            }
+            return arr2.length !== 0 ? arrName[arr2.indexOf(Math.max(...arr2))] : null
+        }
+        let resul
+
+        let result = topSalary(salaries);
+        console.log('++++++++++++++')
+        console.log(result)
+    </script>
+    <script>
+        let salariesNew = {
+            "John": 100,
+            "Pete": 300,
+            "Mary": 250
+        };
+
+        function topSalaryNew(salaries) {
+            let max_sallary = Object.values(salaries).reduce((a, b) => Math.max(a, b));
+            let max_salary2 = Math.max.apply(null, Object.values(salaries));
+            debugger;
+            let test = Object.values(salaries); //масив значень [100, 300, 250]
+            for (let [name, salary] of Object.entries(salaries)) {
+                if (salary == max_sallary) {
+                    return name;
+                }
+            }
+
+            return null;
+        }
+        console.log('=====================');
+        console.log("result:" + topSalaryNew(salariesNew))
+    </script>
+</body>
+
+</html>
