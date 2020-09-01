@@ -1,5 +1,10 @@
-.App {
-  padding: 0 15px;
+li, ul, p, h3, h1 {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
 }
 .btn {
   padding: 5px 10px;
