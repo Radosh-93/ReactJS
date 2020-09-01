@@ -54,7 +54,7 @@
             console.log(`${key}:${value}`); // name:John, затем age:30
         }
 
-        /*Остаточные параметры …*/
+        /*Оста'точные параметры …*/
         let [name1, name2, ...rest] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
         console.log(name1) // Julius
         console.log(name2) // Caesar
@@ -143,16 +143,18 @@
         console.log('Oдной строчкой:' + topSalary2(salaries));
 
         //решение 2
-        let arr2 = [];
-        let arrName = [];
+
         let topSalary = (salaries) => {
-            for (let [key, value] of Object.entries(salaries)) {
-                arr2.push(value);
-                arrName.push(key)
+            let max = 0;
+            let maxName = null;
+            for (let [name, salary] of Object.entries(salaries)) {
+                if (max < salaries) {
+                    max = salaries;
+                    maxName = name;
+                }
             }
-            return arr2.length !== 0 ? arrName[arr2.indexOf(Math.max(...arr2))] : null
+            return maxName
         }
-        let resul
 
         let result = topSalary(salaries);
         console.log('++++++++++++++')
@@ -166,10 +168,10 @@
         };
 
         function topSalaryNew(salaries) {
-            let max_sallary = Object.values(salaries).reduce((a, b) => Math.max(a, b));
-            let max_salary2 = Math.max.apply(null, Object.values(salaries));
+            let max_sallary = Object.values(salaries).reduce((a, b) => Math.max(a, b)); //для большого массива
+            let max_salary2 = Math.max.apply(null, Object.values(salaries)); //для относительно не большого масива, так как елементы масыва будут переметрами callback функции
             debugger;
-            let test = Object.values(salaries); //масив значень [100, 300, 250]
+            let test3 = Object.values(salaries); //масив значень [100, 300, 250]
             for (let [name, salary] of Object.entries(salaries)) {
                 if (salary == max_sallary) {
                     return name;
