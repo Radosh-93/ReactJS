@@ -8,3 +8,6 @@
 input {
     margin: 3px;
 }
+.mainContainer {
+    padding: 0 15px;
+}

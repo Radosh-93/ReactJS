@@ -1,6 +1,6 @@
 import React from "react";
-import Pic1 from '../../access/img/original.webp'
-import Pic2 from '../../access/img/sorrow-2581703_960_720.jpg'
+import Pic1 from '../access/img/original.webp'
+import Pic2 from '../access/img/sorrow-2581703_960_720.jpg'
 
 export const Resolve = ({itemId, data}) => {
     let getId = (id) => document.getElementById(id)

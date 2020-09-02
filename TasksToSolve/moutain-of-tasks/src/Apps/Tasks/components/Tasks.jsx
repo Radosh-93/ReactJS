@@ -1,5 +1,5 @@
 import React from "react";
-import './Tasks.css'
+import style from './Tasks.module.css'
 import {Resolve} from "./Resolve";
 const Tasks = (props) => {
 	const pStyle = {
@@ -8,11 +8,11 @@ const Tasks = (props) => {
 		margin: 0
 	}
 	return (
-		<div>
+		<div className={style.mainContainer}>
 			<h1>Tasks to solve</h1>
 			<a href={props.source} target='_blank' rel='noopener noreferrer'>Source</a>
 			{props.tasksData.map(el => (
-				<div className="container" key={el.id}>
+				<div className={style.container} key={el.id}>
 					<p style={pStyle}><b>#{el.id}</b>{` ${el.description}`}</p>
 					<Resolve itemId={el.id} data={el.data}/>
 				</div>
