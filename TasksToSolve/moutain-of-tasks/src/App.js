@@ -4,6 +4,7 @@ import {NavLink, Route, Switch} from "react-router-dom";
 import TasksContainer from "./Apps/Tasks/components/TasksContainer";
 import RecipeApp from "./Apps/RecipeApp/RecipeApp";
 import FortniteShop from "./Apps/FortniteShop/components/FortniteShop";
+import MovieApp from "./Apps/MovieApp/MovieApp";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                 <Route path={'/tasks'} render={() => <TasksContainer/>}/>
                 <Route path={'/recipe'} render={() => <RecipeApp/>}/>
                 <Route path={'/fortnite'} render={() => <FortniteShop/>}/>
+                <Route path={'/movies'} render={() => <MovieApp/>}/>
             </Switch>
 
         </div>
