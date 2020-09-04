@@ -1,10 +1,14 @@
-import { combineReducers, createStore } from "redux";
+import {combineReducers, compose, createStore} from "redux";
 import taskReducer from './tasks-reducer'
+import todoListReducer from "./todoList-reducer";
 
 let reducers = combineReducers({
-	tasksPage: taskReducer
+	tasksPage: taskReducer,
+	todoListApp: todoListReducer
 });
-let store = createStore(reducers);
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+let store = createStore(reducers, composeEnhancers());
 
 window.store = store;
 
