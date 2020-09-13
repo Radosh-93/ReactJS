@@ -1,30 +1,37 @@
 import React, {useState, useEffect} from "react";
+import AddIcon from '@material-ui/icons/Add';
 
 const FormTodo = (props) => {
     //local state
     const [inputText, setInputText] = useState('');
-    useEffect(()=> {
+    const [inputMode, setInputMode] = useState(false)
+
+    useEffect(() => {
         props.setTodoListFiltered()
     }, [props.status, props.todoList])
+
+    //functions
     const createList = (e) => {
         e.preventDefault();
         props.setTodoList(inputText);
         setInputText('')
+        setInputMode(false)
     }
-    const filterList = (e) => {
-        props.setStatus(e.target.value)
-    }
+
     return (
-        <form onSubmit={createList}>
-            <input type="text" value={inputText} onChange={(e) => {
-                setInputText(e.target.value)
-            }}/>
-            <button type='submit'>+</button>
-            <select name="filtered" onChange={filterList}>
-                <option value="all" defaultValue>All</option>
-                <option value="uncompleted">Uncompleted</option>
-                <option value="completed">Completed</option>
-            </select>
+        <form onSubmit={createList} className='form-todo' onClick={() => {
+            setInputMode(true)
+        }}>
+            <button type='submit' className='btn-plus btn-task'><AddIcon/></button>
+            {inputMode ?
+                <input type="text"
+                       className='input-todo'
+                       value={inputText}
+                       onBlur={(e) => {setInputMode(false); createList(e)}}
+                       autoFocus={true}
+                       onChange={(e) => {setInputText(e.target.value)}}/>
+                : <p>Add a task</p>}
+
         </form>
     )
 }

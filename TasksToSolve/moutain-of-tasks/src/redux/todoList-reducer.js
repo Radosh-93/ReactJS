@@ -2,12 +2,14 @@ const SET_TODO_LIST = 'SET_TODO_LIST';
 const DELETE_TODO = 'DELETE_TODO';
 const COMPLETE_TODO = 'COMPLETE_TODO';
 const SET_STATUS = 'SET_STATUS';
+const SET_TITLES_LIST = 'SET_TITLES_LIST';
 const SET_FILTER_TODO = 'SET_FILTER_TODO';
 
 let initialState = {
     todoList: [],
     todoListFiltered: [],
     status: 'all',
+    titlesList: []
 
 };
 
@@ -22,6 +24,7 @@ const todoListReducer = (state = initialState, action) => {
                 };
                 return {...state, todoList: [...state.todoList, list]};
             }
+            return state
         case DELETE_TODO: {
             return {...state, todoList: state.todoList.filter(item => item.id !== action.id)}
         }
@@ -50,6 +53,9 @@ const todoListReducer = (state = initialState, action) => {
         case SET_STATUS: {
             return {...state, status: action.status}
         }
+        case SET_TITLES_LIST: {
+            return {...state, titlesList: [ ...state.titlesList, action.title]}
+        }
         default:
             return state
     }
@@ -59,7 +65,7 @@ export const setTodoList = (text) => ({type: SET_TODO_LIST, text});
 export const deleteTodo = (id) => ({type: DELETE_TODO, id});
 export const completeTodo = (id) => ({type: COMPLETE_TODO, id});
 export const setStatus = (status) => ({type: SET_STATUS, status});
+export const setTitlesList = (title) => ({type: SET_TITLES_LIST, title});
 export const setTodoListFiltered = () => ({type: SET_FILTER_TODO});
-
 
 export default todoListReducer;
