@@ -21,19 +21,24 @@ const list = [
 	}
 ];
 
+const isSearched = searchTerm => item => item.title.toLowerCase().includes(searchTerm.toLowerCase());
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			list,
-			isActive: true
+			isActive: true,
+			searchTerm: ''
 		};
 		this.onDismiss = this.onDismiss.bind(this);
+		this.onSearchChange = this.onSearchChange.bind(this)
 	}
 	onDismiss(id) {
 		this.setState({list: this.state.list.filter(item => item.objectID !== id)});
-
+	}
+	onSearchChange (event) {
+		this.setState({searchTerm: event.target.value})
 	}
 	render() {
 		let helloWorld = `Welcome to the road to learn Reactdff`;
@@ -42,16 +47,22 @@ class App extends React.Component {
 			[keys[0]]: 'Robin',
 			['last' + 'Name']: 'Wieruch' //идентично как и - lastName: 'Wieruch'
 		}
+		const {list, searchTerm, isActive} = this.state //деструктурированное присваивание обьекта
 		return (
 			<div className="App">
 				<div className='test-block'>
 					<Test1 status='error'/>
 				</div>
-				<ExplainBindingsComponent/>
 				<h2>{helloWorld}</h2>
-				{this.state.isActive && <p>by {person.name} {person.lastName}</p>}
+				{isActive && <p>by {person.name} {person.lastName}</p>}
+				<form>
+					<input type="text"
+						   onChange={this.onSearchChange}
+						   value={searchTerm}/>
+				</form>
                 <ul>
-                    {this.state.list.map(item => (
+                    {list.filter(isSearched(searchTerm))
+						.map(item => (
                     	<li key={item.objectID}>
 		                    <span><a href={item.url}>{item.title}</a></span>
 		                    <span>{item.author}</span>
@@ -63,6 +74,9 @@ class App extends React.Component {
 	                    </li>
                     ))}
                 </ul>
+			{/*Examples*/}
+			<hr style={{height: '3px', backgroundColor: 'red'}}/>
+				<ExplainBindingsComponent/>
 			</div>
 		);
 	}
