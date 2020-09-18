@@ -62,16 +62,19 @@ class App extends React.Component {
             .then(response => response.json())
             .then(data => this.setSearchTopStories(data))
             .catch(error => error);
-        console.log('fetchSearchTopStories<<<<<11')
     }
 
     onDismiss(id) {
+        const {results, searchKey} = this.state;
         const isNotId = item => item.objectID !== id;
-        const updatedHits = this.state.results[this.state.searchKey].hits.filter(isNotId);
+        const updatedHits = results[searchKey].hits.filter(isNotId);
         this.setState({
             results: {
-                ...this.state.results,
-                [this.state.searchKey]: {...this.state.results[this.state.searchKey], hits: updatedHits}
+                ...results,
+                [searchKey]: {
+                    ...results[searchKey],
+                    hits: updatedHits
+                }
             }
         });
     }
