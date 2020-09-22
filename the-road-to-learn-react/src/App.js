@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import './App.scss';
 import {Test1} from "./examples/conditional";
 import {Search} from "./components/Search";
@@ -17,12 +18,14 @@ const PARAM_PAGE = 'page=';
 const PARAM_HPP = 'hitsPerPage=';
 
 class App extends React.Component {
+    _isMounted = false;
     constructor(props) {
         super(props);
         this.state = {
             results: null,
             searchKey: 'redux',
-            searchTerm: DEFAULT_QUERY
+            searchTerm: DEFAULT_QUERY,
+            error: null
         };
         this.onDismiss = this.onDismiss.bind(this); //привязка метода
         this.onSearchChange = this.onSearchChange.bind(this);
@@ -74,20 +77,26 @@ class App extends React.Component {
             }
         });
     }
-    needsToSearchTopStories (searchTerm) {
+
+    needsToSearchTopStories(searchTerm) {
         return !this.state.results[searchTerm]
     }
+
     fetchSearchTopStories(searchTerm, page = 0) {
-        fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
-            .then(response => response.json())
-            .then(data => this.setSearchTopStories(data))
-            .catch(error => error);
+        axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
+            .then(result => this._isMounted && this.setSearchTopStories(result.data))
+            .catch(error => this._isMounted && this.setState({error}));
     }
 
     componentDidMount() {
+        this._isMounted = true;
+
         const {searchTerm} = this.state;
         this.setState({searchKey: searchTerm});
         this.fetchSearchTopStories(searchTerm)
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     render() {
@@ -98,11 +107,10 @@ class App extends React.Component {
             ['last' + 'Name']: 'Wieruch' //идентично как и - lastName: 'Wieruch'
         }
 
-        const {searchTerm, results, searchKey} = this.state; //деструктурированное присваивание обьекта
+        const {searchTerm, results, searchKey, error} = this.state; //деструктурированное присваивание обьекта
 
         const page = (results && results[searchKey]) ? results[searchKey].page : 0;
         const list = (results && results[searchKey]) ? results[searchKey].hits : [];
-        if (!results) return null; //предотвращение отрисовки, когда еще нет результата
         console.log(results);
         return (
             <div className="App">
@@ -119,12 +127,17 @@ class App extends React.Component {
                         >
                             Search
                         </Search>
-                        <Table list={list} onDismiss={this.onDismiss}/>
-                        <div className="interaction">
-                            <Button onClick={() => (this.fetchSearchTopStories(searchKey, page + 1))}>
-                                More stories
-                            </Button>
-                        </div>
+                        {error
+                            ? (<div className='interactions'>
+                                <p>Something went wrong...</p>
+                            </div>)
+                            : (<Table list={list}
+                                      onDismiss={this.onDismiss}
+                                      page={page} s
+                                      earchKey={searchKey}
+                                      fetchSearchTopStories={this.fetchSearchTopStories}
+                            />)}
+
                     </div>
                 </div>
 
