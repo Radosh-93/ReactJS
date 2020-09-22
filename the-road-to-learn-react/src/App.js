@@ -29,6 +29,7 @@ class App extends React.Component {
         this.onSearchSubmit = this.onSearchSubmit.bind(this);
         this.fetchSearchTopStories = this.fetchSearchTopStories.bind(this);
         this.setSearchTopStories = this.setSearchTopStories.bind(this);
+        this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this)
 
     }
 
@@ -51,12 +52,31 @@ class App extends React.Component {
     }
 
     onSearchSubmit(event) {
-        const {searchTerm} = this.state;
-        this.fetchSearchTopStories(searchTerm);
-        this.setState({searchKey: searchTerm});
         event.preventDefault();
+        const {searchTerm} = this.state;
+        this.setState({searchKey: searchTerm});
+        if (this.needsToSearchTopStories(searchTerm)) {
+            this.fetchSearchTopStories(searchTerm);
+        }
     }
 
+    onDismiss(id) {
+        const {results, searchKey} = this.state;
+        const {hits, page} = results[searchKey]
+        const updatedHits = hits.filter(item => item.objectID !== id);
+        this.setState({
+            results: {
+                ...results,
+                [searchKey]: {
+                    hits: updatedHits,
+                    page
+                }
+            }
+        });
+    }
+    needsToSearchTopStories (searchTerm) {
+        return !this.state.results[searchTerm]
+    }
     fetchSearchTopStories(searchTerm, page = 0) {
         fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
             .then(response => response.json())
@@ -64,28 +84,10 @@ class App extends React.Component {
             .catch(error => error);
     }
 
-    onDismiss(id) {
-        const {results, searchKey} = this.state;
-        const isNotId = item => item.objectID !== id;
-        const updatedHits = results[searchKey].hits.filter(isNotId);
-        this.setState({
-            results: {
-                ...results,
-                [searchKey]: {
-                    ...results[searchKey],
-                    hits: updatedHits
-                }
-            }
-        });
-    }
-
     componentDidMount() {
         const {searchTerm} = this.state;
         this.setState({searchKey: searchTerm});
-        fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}0&${PARAM_HPP}${DEFAULT_HPP}`)
-            .then(response => response.json())
-            .then(data => this.setSearchTopStories(data))
-            .catch(error => error)
+        this.fetchSearchTopStories(searchTerm)
     }
 
     render() {
@@ -98,8 +100,8 @@ class App extends React.Component {
 
         const {searchTerm, results, searchKey} = this.state; //деструктурированное присваивание обьекта
 
-        const page = (results && results[searchKey] && results[searchKey].page) || 0;
-        const list = (results && results[searchKey] && results[searchKey].hits) || [];
+        const page = (results && results[searchKey]) ? results[searchKey].page : 0;
+        const list = (results && results[searchKey]) ? results[searchKey].hits : [];
         if (!results) return null; //предотвращение отрисовки, когда еще нет результата
         console.log(results);
         return (
