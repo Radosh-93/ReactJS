@@ -19,7 +19,7 @@ const Shop = () => {
         const data = await fetch(`https://fortniteapi.io/v1/items/upcoming?lang=en`, {headers: {Authorization: APP_KEY}});
         const items = await data.json();
         console.log(items.items)
-        setItems(items.items.filter((el, i) => el.rarity === 'shadow series'))
+        setItems(items.items)
 
     }
     return (
